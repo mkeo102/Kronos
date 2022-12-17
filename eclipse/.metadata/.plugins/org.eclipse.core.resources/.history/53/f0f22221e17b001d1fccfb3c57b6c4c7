@@ -1,0 +1,62 @@
+package me.wavelength.baseclient.module.modules.movement;
+
+import org.lwjgl.input.Keyboard;
+
+import me.wavelength.baseclient.event.events.UpdateEvent;
+import me.wavelength.baseclient.module.AntiCheat;
+import me.wavelength.baseclient.module.Category;
+import me.wavelength.baseclient.module.Module;
+import me.wavelength.baseclient.utils.MovementUtil;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
+import net.minecraft.util.BlockPos;
+
+public class MotionFly extends Module {
+	
+	public MotionFly() {
+		super("motionFly", "allows you to fly" , Keyboard.KEY_H, Category.MOVEMENT, AntiCheat.VANILLA, AntiCheat.FLAMEAC);
+	}
+	
+	public void setup() {
+		moduleSettings.addDefault("speed", 1f);
+	}
+	
+	float speed = moduleSettings.getFloat("speed");
+	
+	int timerTime = 0;
+	
+	public void onUpdate(UpdateEvent event) {
+		
+		 mc.getNetHandler().sendPacketEvent(new C08PacketPlayerBlockPlacement(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.5, mc.thePlayer.posZ), 1, new ItemStack(Blocks.stone.getItem(mc.theWorld, new BlockPos(-1, -1, -1))), 0, 0.94f, 0));
+	        mc.getNetHandler().sendPacketNoEvent(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY + 3.05, mc.thePlayer.posZ, false));
+	        mc.getNetHandler().sendPacketNoEvent(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, false));
+	        mc.getNetHandler().sendPacketNoEvent(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY+0.41999998688697815, mc.thePlayer.posZ, true));
+		
+		
+		
+		
+		mc.thePlayer.motionY = 0;
+		mc.thePlayer.onGround = true;
+		mc.thePlayer.isAirBorne = false;
+		MovementUtil.setSpeed(speed);
+		
+		
+		if(timerTime <= 2) {
+			mc.timer.timerSpeed = 1.25f;
+		} else if(timerTime < 2) {
+			mc.timer.timerSpeed = 1f;
+			timerTime = 0;
+		}
+			
+		timerTime++;
+		
+		
+	}
+	
+	public void onDisable() {
+		mc.timer.timerSpeed = 1f;
+	}
+
+}

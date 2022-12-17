@@ -1,0 +1,44 @@
+package me.wavelength.baseclient.module.modules.movement;
+
+import org.lwjgl.input.Keyboard;
+
+import me.wavelength.baseclient.module.AntiCheat;
+import me.wavelength.baseclient.module.Category;
+import me.wavelength.baseclient.module.Module;
+import me.wavelength.baseclient.utils.MovementUtil;
+
+public class MotionFly extends Module {
+	
+	public MotionFly() {
+		super("motionFly", "allows you to fly" , Keyboard.KEY_H, Category.MOVEMENT, AntiCheat.VANILLA, AntiCheat.FLAMEAC);
+	}
+	
+	public void setup() {
+		moduleSettings.addDefault("speed", 0.4f);
+	}
+	
+	float speed = moduleSettings.getFloat("speed");
+	
+	int timerTime;
+	
+	public void onUpdate(UpdateEvent event) {
+		mc.thePlayer.motionY = 0;
+		mc.thePlayer.onGround = true;
+		mc.thePlayer.isAirBorne = false;
+		MovementUtil.setSpeed(0.40f);
+		
+		
+		if(timerTime <= 2) {
+			mc.timer.timerSpeed = 1.1f;
+		} else if(timerTime < 2) {
+			mc.timer.timerSpeed = 1f;
+			timerTime = 0;
+		}
+			
+		timerTime++;
+		
+		
+	}
+	
+
+}

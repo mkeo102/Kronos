@@ -1,0 +1,5 @@
+package me.wavelength.baseclient.utils;
+
+public class MovementuUtil {
+
+}

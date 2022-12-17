@@ -1,0 +1,7 @@
+package me.wavelength.baseclient.module.modules.movement;
+
+import me.wavelength.baseclient.module.Module;
+
+public class MotionFly import Module {
+
+}
