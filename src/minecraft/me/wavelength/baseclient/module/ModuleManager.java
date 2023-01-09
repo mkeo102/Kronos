@@ -42,6 +42,7 @@ public class ModuleManager extends EventListener {
 		registerModule(new MotionFly());
 		registerModule(new TimerSpeed());
 		registerModule(new Speed());
+		registerModule(new Timer());
 	}
 
 	public Module getModule(Class<? extends Module> clasz) {
