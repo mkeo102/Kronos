@@ -39,10 +39,15 @@ public class MotionFly extends Module {
 				
 		mc.thePlayer.motionY = 0;
 		mc.thePlayer.onGround = true;
-		mc.thePlayer.isAirBorne = false;
 		MovementUtil.setSpeed(speed);
-		mc.timer.timerSpeed = 1.1f;
 		
+		if(timerTime != 20{
+			mc.timer.timerSpeed = 1.1f;
+		} else {
+			timerTimer = 0;
+			mc.tmer.timerSpeed = 1f;
+		}
+			
 		if(MovementUtil.isMoving()) {
 			if(mc.gameSettings.isKeyDown(mc.gameSettings.keyBindJump) == true) {
 				mc.thePlayer.motionY = 0.419999986886978;
