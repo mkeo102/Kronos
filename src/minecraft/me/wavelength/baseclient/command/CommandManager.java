@@ -64,6 +64,7 @@ public class CommandManager extends EventListener {
 		registerCommand(new XRayCommand());
 		registerCommand(new FontCommand());
 		registerCommand(new ToggleCommand());
+		registerCommand(new VclipCommand());
 	}
 
 	public List<Command> getCommands() {
